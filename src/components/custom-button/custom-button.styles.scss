@@ -19,4 +19,18 @@
       color: black;
       border: 1px solid black;
     }
+
+    // the ambersand in Sass is the same as
+    // custom-button google-sign-in
+    // without it, it would point to a child element
+    // in this case we want an element with both of these classes
+    &.google-sign-in {
+      background-color: #4285f4;
+      color: white;
+
+      &:hover {
+        background-color: #357ae8;
+        border: none;
+      }
+    }
   }
