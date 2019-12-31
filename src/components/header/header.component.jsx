@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { auth } from '../../firebase/firebase.utils';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import { ReactComponent as Logo} from '../../assets/crown.svg';
 // the above way is a special syntax for using SVGs
@@ -12,7 +14,7 @@ import { ReactComponent as Logo} from '../../assets/crown.svg';
 
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
     <div className='header'>
         <Link className='logo-container' to="/">
             {/* Logo is an actual React component */}
@@ -35,14 +37,17 @@ const Header = ({ currentUser }) => (
             }
             {/* if currentUser is an object -> evaluates true
             if it is null -> evaluates false */}
+                <CartIcon />
         </div>
+        {hidden ? null : <CartDropdown />}
     </div>
 );
 
 // mapStateToProps is standard naming with redux codebases - though it could be anything
 // state is the root-reducer
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+const mapStateToProps = ({user: { currentUser }, cart: { hidden }}) => ({
+    currentUser,
+    hidden
 });
 
 export default connect(mapStateToProps)(Header);
