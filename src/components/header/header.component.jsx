@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+// connect is a HOC - allows us to modify our component to have access
+// to things related to redux
+import { connect } from 'react-redux';
 
 import { auth } from '../../firebase/firebase.utils';
 
@@ -34,6 +37,12 @@ const Header = ({ currentUser }) => (
             if it is null -> evaluates false */}
         </div>
     </div>
-)
+);
 
-export default Header;
+// mapStateToProps is standard naming with redux codebases - though it could be anything
+// state is the root-reducer
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Header);
