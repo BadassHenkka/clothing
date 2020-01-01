@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 // connect is a HOC - allows us to modify our component to have access
 // to things related to redux
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { selectCartHidden } from '../../redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../redux/user/user.selector';
 
 import { ReactComponent as Logo} from '../../assets/crown.svg';
 // the above way is a special syntax for using SVGs
@@ -45,9 +48,11 @@ const Header = ({ currentUser, hidden }) => (
 
 // mapStateToProps is standard naming with redux codebases - though it could be anything
 // state is the root-reducer
-const mapStateToProps = ({user: { currentUser }, cart: { hidden }}) => ({
-    currentUser,
-    hidden
+// createStructuredSelector basically just passes the top level state to
+// the pointed selectors.
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser,
+    hidden: selectCartHidden
 });
 
 export default connect(mapStateToProps)(Header);
