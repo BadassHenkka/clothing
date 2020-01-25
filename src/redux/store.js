@@ -13,4 +13,5 @@ const middlewares = [logger];
 // as individual arguments.
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
+// store is used in index.js in the Provider component from react-redux
 export default store;
