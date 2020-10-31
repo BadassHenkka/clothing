@@ -8,18 +8,19 @@ import './collection-preview.styles.scss';
 // and puts out the collection title and all the items inside it
 
 const CollectionPreview = ({ title, items }) => (
-    <div className='collection-preview'>
-        <h1 className='title'>{title.toUpperCase()}</h1>
-        <div className='preview'>
-            {   // filter for only 4 items showing for a preview
-                items
-                .filter((item, idx) => idx < 4)
-                .map(item =>(
-                    <CollectionItem key={item.id} item={item} />
-                ))
-            }
-        </div>
+  <div className='collection-preview'>
+    <h1 className='title'>{title.toUpperCase()}</h1>
+    <div className='preview'>
+      {
+        // filter for only 4 items showing for a preview
+        items
+          .filter((item, idx) => idx < 4)
+          .map((item) => (
+            <CollectionItem key={item.id} item={item} />
+          ))
+      }
     </div>
+  </div>
 );
 
 // Keep in mind that the array methods (map, filter) will
