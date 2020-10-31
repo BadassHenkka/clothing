@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
+import { persistStore } from 'redux-persist';
 // logger is handy for debugging redux code
 import logger from 'redux-logger';
 
@@ -11,7 +12,10 @@ const middlewares = [logger];
 // Creating our store: createStore allways gets the rootReducer and return
 // from applyMiddleware which gets the spread values from middlewares
 // as individual arguments.
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
-
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 // store is used in index.js in the Provider component from react-redux
-export default store;
+
+// Here we create a persisted version of our store
+export const persistor = persistStore(store);
+
+export default { store, persistor };
